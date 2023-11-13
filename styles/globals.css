@@ -17,6 +17,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+:root{
+  --s: 300px; 
+  --t: 500px;
+  --b: 3px;
+  --g: 14px; 
+  /* --c: #4ecdc4; */
+  --c: #083d55;
+}
 
 * {
   box-sizing: border-box;

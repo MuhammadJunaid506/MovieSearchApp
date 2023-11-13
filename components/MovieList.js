@@ -6,14 +6,14 @@ const MovieList = ({ movies }) => {
     return (
       <>
       {mov?.map((movie) => (
-      <div className={styles.card}>
+      <div className={styles.cardpic}>
         <Link href={`/${movie.id}`}>
           {/* <li  className="border border-gray-300 p-4"> */}
-          <a>
+          {/* <a> */}
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="mb-2 w-full"  key={movie.id}/>
             <p className="text-lg font-semibold">{movie.title}</p>
             <p>Release Date: {movie.release_date}</p>
-          </a>
+          {/* </a> */}
           {/* </li> */}
         </Link>
       </div>

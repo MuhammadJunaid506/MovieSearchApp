@@ -104,7 +104,7 @@ const Home = () => {
           {filterOpen && <MovieFilter/>}
         </nav>
         <main className="flex- p-10 text-center text-lg text-gray-700">
-          <div className="flex flex-wrap flex-1 bg-gray-300 p-10 border border-solid border-gray-300 rounded-md shadow-md text-left text-lg text-gray-700 items-center">
+          <div className="flex flex-wrap flex-1 bg-white p-10 border border-solid border-gray-300 rounded-md shadow-md text-left text-lg text-gray-700 items-center justify-center">
             <MovieList movies={filterMovie} />
           </div>
           <Pagination onPageChange={handlePageChange} page={page} totalPages={totalPages} />

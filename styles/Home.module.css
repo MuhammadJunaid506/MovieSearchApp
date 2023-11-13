@@ -118,6 +118,22 @@
   line-height: 1.5;
 }
 
+.cardpic {
+  width: var(--s);
+  height: var(--t);
+  aspect-ratio: 1.5;
+  outline: calc(var(--s) / 2) solid rgba(0, 0, 0, 0.264);
+  outline-offset: calc(var(--s) / -2);
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 1.5rem;
+  padding: 1.5rem;
+}
+.cardpic:hover {
+  outline: var(--b) solid var(--c);
+  outline-offset: var(--g);
+}
+
 /* @media (prefers-color-scheme: dark) {
   .card,
   .footer {
