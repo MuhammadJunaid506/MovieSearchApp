@@ -9,9 +9,11 @@ const MovieList = ({ movies }) => {
       <div className={styles.card}>
         <Link href={`/${movie.id}`}>
           {/* <li  className="border border-gray-300 p-4"> */}
+          <a>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="mb-2 w-full"  key={movie.id}/>
             <p className="text-lg font-semibold">{movie.title}</p>
             <p>Release Date: {movie.release_date}</p>
+          </a>
           {/* </li> */}
         </Link>
       </div>

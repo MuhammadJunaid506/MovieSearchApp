@@ -1,84 +1,106 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+"use client";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchMovies,
+  setlanguage,
+  setinclude_adult,
+  setinclude_video,
+  setyear,
+  selectLanguage,
+  selectYear,
+  selecttvideo,
+  selecttAdult,
+} from "../redux/slices/movieSlice";
 
-const MovieFilter = ({ onFilterChange }) => {
-    const [selectedGenre, setSelectedGenre] = useState('');
-    const [filterOpen, setFilterOpen] = useState(false);
-  
-    const genres = [
-      { id: 28, name: 'Action' },
-      // Add more genres as needed
-    ];
-  
-    const handleToggleFilter = () => {
-      setFilterOpen(!filterOpen);
-    };
-  
-    const handleGenreChange = (genreId) => {
-      setSelectedGenre(genreId);
-    };
-  
-    const applyFilters = () => {
-      onFilterChange(selectedGenre);
-      setFilterOpen(false);
-    };
-  
-    return (
-      <>
-        {/* <button
-          className="bg-blue-500 text-white py-2 px-4 rounded-md"
-          onClick={handleToggleFilter}
+const MovieFilter = () => {
+  const dispatch = useDispatch();
+  const language = useSelector(selectLanguage);
+  const includeAdult = useSelector(selecttAdult);
+  const includeVideo = useSelector(selecttvideo);
+  const year = useSelector(selectYear);
+
+  const handleFilterChange = (filterName, value) => {
+    console.log(".....", filterName, value);
+    switch (filterName) {
+      case "language":
+        dispatch(setlanguage(value));
+        dispatch(fetchMovies({ language: value }));
+        break;
+      case "includeAdult":
+        dispatch(setinclude_adult(value));
+        dispatch(fetchMovies({ include_adult: value }));
+        break;
+      case "includeVideo":
+        dispatch(setinclude_video(value));
+        dispatch(fetchMovies({ include_video: value }));
+        break;
+      case "year":
+        dispatch(setyear(value));
+        dispatch(fetchMovies({ year: value }));
+        break;
+      default:
+        break;
+    }
+  };
+  return (
+    <>
+      <div className="origin-top-right absolute top-20 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div
+          className="py-1"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
         >
-          Open Filter
-        </button> */}
-  
-        {filterOpen && (
-          <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-8 max-w-md mx-auto rounded-md">
-              <span
-                className="absolute top-4 right-4 cursor-pointer text-xl"
-                onClick={handleToggleFilter}
-              >
-                &times;
-              </span>
-              <h3 className="text-xl font-semibold mb-4">Genres</h3>
-              <div>
-                {genres.map((genre) => (
-                  <label key={genre.id} className="block mb-2">
-                    <input
-                      type="radio"
-                      value={genre.id}
-                      checked={selectedGenre === genre.id}
-                      onChange={() => handleGenreChange(genre.id)}
-                      className="mr-2"
-                    />
-                    {genre.name}
-                  </label>
-                ))}
-              </div>
-  
-              <button
-                className="bg-green-500 text-white py-2 px-4 rounded-md mt-4"
-                onClick={applyFilters}
-              >
-                Apply Filters
-              </button>
+          <div
+            className="py-2 px-4"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm text-gray-700">Language:</label>
+              <input
+                type="text"
+                value={language}
+                onChange={(e) => handleFilterChange("language", e.target.value)}
+                className="border rounded-md p-1 w-2/3 text-sm text-gray-700"
+              />
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm text-gray-700">Include Adult:</label>
+              <input
+                type="checkbox"
+                checked={includeAdult}
+                onChange={(e) =>
+                  handleFilterChange("includeAdult", e.target.checked)
+                }
+              />
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm text-gray-700">Include Video:</label>
+              <input
+                type="checkbox"
+                checked={includeVideo}
+                onChange={(e) =>
+                  handleFilterChange("includeVideo", e.target.checked)
+                }
+              />
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm text-gray-700">Year:</label>
+              <input
+                type="number"
+                value={year}
+                onChange={(e) => handleFilterChange("year", e.target.value)}
+                className="border rounded-md p-1 w-2/3 text-sm text-gray-700"
+              />
             </div>
           </div>
-        )}
-      </>
-    );
-  };
-  
-  export default MovieFilter;
-
-
-export const FilterIcon = ({ onClick }) => {
-  return (
-    <div className="cursor-pointer" onClick={onClick}>
-      <FontAwesomeIcon icon={faFilter} size="lg" />
-    </div>
+        </div>
+      </div>
+    </>
   );
 };
 
+export default MovieFilter;
