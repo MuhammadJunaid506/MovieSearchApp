@@ -1,26 +1,22 @@
 'use client';
-import styles from '../styles/Home.module.css'
-import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+
 const MovieList = ({ movies }) => {
   const mov = Array.isArray(movies) ? movies : [];
-    return (
-      <>
+
+  return (
+    <>
       {mov?.map((movie) => (
-      <div className={styles.cardpic}>
-        <Link href={`/${movie.id}`}>
-          {/* <li  className="border border-gray-300 p-4"> */}
-          {/* <a> */}
-            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="mb-2 w-full"  key={movie.id}/>
+        <div className={styles.cardpic} key={movie.id}>
+          <a href={`/${movie.id}`}>
+            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="mb-2 w-full" />
             <p className="text-lg font-semibold">{movie.title}</p>
             <p>Release Date: {movie.release_date}</p>
-          {/* </a> */}
-          {/* </li> */}
-        </Link>
-      </div>
+          </a>
+        </div>
       ))}
-      </>
-    );
-  };
-  
-  export default MovieList;
-  
+    </>
+  );
+};
+
+export default MovieList;
